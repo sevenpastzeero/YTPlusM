@@ -1,5 +1,5 @@
 # YTPlusM
-The best fork of an incredible enhancer for YouTube on iOS, featuring over hundred customizable options but with more tweaks than the original <a href="https://github.com/dayanch96/YTLite">YouTube Plus.</a>
+The best fork of an incredible enhancer for YouTube on iOS, featuring over hundred customizable options but with the latest version freed and with more tweaks than the original <a href="https://github.com/dayanch96/YTLite">YouTube Plus.</a>
 
 <strong>This is the main repo, for pre-built IPAs and Debs. Updates will be published in Releases tab.</strong>
 
@@ -217,7 +217,7 @@ Finally! YTLowContrastMode added, supporting also newest YT IPAs
 </details>
 
 <details>
- <summary><strong>NEW!</strong>YTLowContrastMode (only on YTPlusM versions)</summary>
+ <summary><strong>NEW!</strong> YTLowContrastMode (only on YTPlusM versions)</summary>
  <p>YTLowContrastMode is a tweak developed by <a href="https://github.com/arichornlover">arichornlover</a>, a Tweak to make YT and YTMusic apps' Interface Low Contrast as possible and Easy on the eyes.</p>
  <p><strong>YTLowContrastMode preferences are not available</strong>; the tweak <strong>is already activated</strong>strong> when you choose to inject it.</p>
  <p>Source code and additional information are available <a href="https://github.com/arichornlover/YTLowContrastMode">in arichornlover's repository.</p>
