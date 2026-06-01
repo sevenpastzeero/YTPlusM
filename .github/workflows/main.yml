@@ -139,7 +139,8 @@ jobs:
       - name: Checkout Releases_builder 
         uses: actions/checkout@v6.0.2       
         with:
-          ref: Releases_builder 
+          repository: Mark02-2012/YTPlusM
+          ref: Releases_builder
           
       - name: Download built debs
         uses: actions/download-artifact@v8
