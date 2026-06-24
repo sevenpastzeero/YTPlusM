@@ -16,7 +16,7 @@ Don't know how to build YTPlus or YTPlusM? Read [How to build YouTube Plus and Y
 
 ### Starting from now, I'll slowly remove download table and releases' files due to legal reason; I CREATED A NEW TELEGRAM CHANNEL FOR RELEASES! 👉[LINK TO JOIN](https://t.me/Mark02workshop_official)👈
 
-### I also created a new tweak for fix playback issues! You can find it in my new releases in the Telegram channel, in GitHub Actions and [in the official repository](https://github.com/Mark02-2012/YTPlaybackFix)
+### I also created a new tweak to fix playback issues! You can find it in my new releases in the Telegram channel, in GitHub Actions and [in the official repository](https://github.com/Mark02-2012/YTPlaybackFix)
 
 ## Table of Contents
 - [Screenshots](#screenshots)
