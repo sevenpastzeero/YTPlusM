@@ -4,7 +4,7 @@
   The best fork of an incredible enhancer for the popular video app on iOS, featuring over a hundred customizable options but with the latest version freed and with more tweaks than the original <a href="https://github.com/dayanch96/YTLite">YTPlus.</a>
 </p>
 
-<p><strong>THANK YOU ALL VERY MUCH FOR THE 150 STARS AND 100 FORKS🎉</strong></p>
+<p><strong>THANK YOU ALL VERY MUCH FOR THE 175 STARS AND 100 FORKS🎉</strong></p>
 
 <strong>Updates will be published in my new Telegram channel, no more updates here 👉[LINK TO JOIN](https://t.me/Mark02workshop_official)👈.</strong>
 
