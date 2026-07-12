@@ -68,6 +68,26 @@ on:
         required: true
         default: false
 
+      enable_ytpfBETA:
+        type: boolean
+        required: true
+        default: false
+
+      enable_ycq:
+        type: boolean
+        required: true
+        default: false
+
+      enable_ys:
+        type: boolean
+        required: true
+        default: false
+
+      enable_pdstm:
+        type: boolean
+        required: true
+        default: false
+
       tweak_version:
         type: string
         required: false
@@ -84,6 +104,13 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Check for conflicting inputs
+        run: |
+          if [[ "${{ inputs.enable_ytpf }}" == "true" && "${{ inputs.enable_ytpfBETA }}" == "true" ]]; then
+            echo "::error::You can't select both inputs 'Integrate YTPlaybackFix' and 'Integrate YTPlaybackFix beta' at the same time. Please select only one of them."
+            exit 1
+          fi
+          
       - name: Install Dependencies
         run: brew install make ldid dpkg
 
@@ -93,7 +120,7 @@ jobs:
           echo "THEOS=${{ github.workspace }}/theos" >> $GITHUB_ENV
 
       - name: Cache Theos
-        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption }}
+        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption || inputs.enable_ytpf || inputs.enable_ytpfBETA || inputs.enable_ycq || inputs.enable_ys || inputs.enable_pdstm }}
         id: theos
         uses: actions/cache@v5
         env:
@@ -104,7 +131,7 @@ jobs:
           restore-keys: ${{ env.cache-name }}
 
       - name: Setup Theos
-        if: ${{ (inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption) && steps.theos.outputs.cache-hit != 'true' }}
+        if: ${{ (inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption || inputs.enable_ytpf || inputs.enable_ytpfBETA || inputs.enable_ycq || inputs.enable_ys || inputs.enable_pdstm) && steps.theos.outputs.cache-hit != 'true' }}
         uses: actions/checkout@v6
         with:
           repository: theos/theos
@@ -113,7 +140,7 @@ jobs:
           submodules: recursive
 
       - name: Download iOS SDK
-        if: ${{ (inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption) && steps.theos.outputs.cache-hit != 'true' }}
+        if: ${{ (inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption || inputs.enable_ytpf || inputs.enable_ytpfBETA || inputs.enable_ycq || inputs.enable_ys || inputs.enable_pdstm) && steps.theos.outputs.cache-hit != 'true' }}
         run: |
           git clone --quiet -n --depth=1 --filter=tree:0 https://github.com/theos/sdks/
           cd sdks
@@ -138,7 +165,7 @@ jobs:
    
 
       - name: Clone YouTubeHeader
-        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption }}
+        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption || inputs.enable_ys }}
         run: |
           if [ -d "$THEOS/include/YouTubeHeader" ]; then
             cd $THEOS/include/YouTubeHeader && git pull
@@ -151,7 +178,7 @@ jobs:
           fi
 
       - name: Clone PSHeader
-        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption }}
+        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_ytweaks || inputs.enable_gonerino || inputs.enable_youspeed || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption || inputs.enable_ys }}
         run: |
           if [ -d "$THEOS/include/PSHeader" ]; then
             cd $THEOS/include/PSHeader && git pull
@@ -184,7 +211,7 @@ jobs:
         run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouQuality.git
 
       - name: Clone YTVideoOverlay
-        if: ${{ inputs.enable_yq || inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_youspeed || inputs.enable_YouGetCaption }}
+        if: ${{ inputs.enable_yq || inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_youspeed || inputs.enable_YouGetCaption || inputs.enable_ys }}
         run: git clone --quiet --depth=1 https://github.com/PoomSmart/YTVideoOverlay.git
 
       - name: Clone DontEatMyContent
@@ -205,21 +232,7 @@ jobs:
 
       - name: Clone YTLowContrastMode
         if: ${{ inputs.enable_YTLCM }}
-        run: git clone --quiet --depth=1 https://github.com/arichornlover/YTLowContrastMode.git
-
-      - name: Patch YTLowContrastMode
-        if: ${{ inputs.enable_YTLCM }}
-        run: |
-         cd YTLowContrastMode
-          echo '#import <UIKit/UIKit.h>' > patch.txt
-          echo '#define IS_ENABLED(k) YES' >> patch.txt
-          echo '@interface YTQTMButton : UIButton' >> patch.txt
-          echo '- (void)setTintColor:(id)color;' >> patch.txt
-          echo '@end' >> patch.txt
-          echo '@interface YTCollectionViewCell : UICollectionViewCell' >> patch.txt
-          echo '@end' >> patch.txt
-          cat Tweak.xm >> patch.txt
-          mv patch.txt Tweak.xm
+        run: git clone --quiet --depth=1 https://github.com/Mark02-2012/YTLowContrastMode.git
 
       - name: Clone VolumeBoostYT
         if: ${{ inputs.enable_VolumeBoostYT }}
@@ -232,6 +245,22 @@ jobs:
       - name: Clone YTPlaybackFix
         if: ${{ inputs.enable_ytpf }}
         run: git clone --quiet --depth=1 https://github.com/Mark02-2012/YTPlaybackFix.git
+
+      - name: Clone YTPlaybackFix beta branch
+        if: ${{ inputs.enable_ytpfBETA }}
+        run: git clone --quiet --depth=1 -b beta-testing https://github.com/Mark02-2012/YTPlaybackFix.git
+
+      - name: Clone YouChooseQuality
+        if: ${{ inputs.enable_ycq }}
+        run: git clone --quiet --depth=1 https://github.com/PoomSmart/YouChooseQuality.git
+
+      - name: Clone YouShare
+        if: ${{ inputs.enable_ys }}
+        run: git clone --quiet --depth=1 https://github.com/Tonwalter888/YouShare.git
+
+      - name: Clone PleaseDontStopTheMusic
+        if: ${{ inputs.enable_pdstm }}
+        run: git clone --quiet --depth=1 https://github.com/mikey820/PleaseDontStopTheMusic.git
         
       - name: Build YouPiP
         if: ${{ inputs.enable_youpip }}
@@ -258,7 +287,7 @@ jobs:
           mv packages/*.deb ../ytabc.deb
 
       - name: Build YouGroupSettings
-        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT || inputs.enable_YouGetCaption }}
+        if: ${{ inputs.enable_youpip || inputs.enable_ytuhd || inputs.enable_yq || inputs.enable_ryd || inputs.enable_ytabc || inputs.enable_demc || inputs.enable_YTLCM || inputs.enable_VolumeBoostYT }}
         run: |
           cd YouGroupSettings && make clean package DEBUG=0 FINALPACKAGE=1
           mv packages/*.deb ../ygs.deb
@@ -322,6 +351,33 @@ jobs:
         run: |
           cd YTPlaybackFix && make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
           mv packages/*.deb ../ytpf.deb
+
+      - name: Build YTPlaybackfix beta
+        if: ${{ inputs.enable_ytpfBETA }}
+        run: |
+          cd YTPlaybackFix && make clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+          mv packages/*.deb ../ytpfbeta.deb
+
+      - name: Build YouChooseQuality
+        if: ${{ inputs.enable_ycq }}
+        run: |
+          cd YouChooseQuality && make clean package DEBUG=0 FINALPACKAGE=1
+          mv packages/*.deb ../youchoosequality.deb
+
+      - name: Build YouShare
+        if: ${{ inputs.enable_ys }}
+        run: |
+          cd YouShare && make clean package DEBUG=0 FINALPACKAGE=1
+          mv packages/*.deb ../youshare.deb
+
+      - name: Build PleaseDontStopTheMusic
+        if: ${{ inputs.enable_pdstm }}
+        run: |
+          cd PleaseDontStopTheMusic
+          find . -name "*.deb" -delete 2>/dev/null || true
+          find . -name "packages" -type d -exec rm -rf {} + 2>/dev/null || true
+          $(MAKE) -C rootless package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless || true
+          mv rootless/packages/*.deb ../pdstm.deb 2>/dev/null || true
 
       - name: Clone Open in YouTube (Safari extension)
         run: |
