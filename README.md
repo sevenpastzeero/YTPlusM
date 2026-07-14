@@ -20,7 +20,7 @@ Don't know how to build YTPlus or YTPlusM? Read [How to build YouTube Plus and Y
 **1. From June 1 2026 you do not need anymore [YTPlusM DIY](https://github.com/Mark02-2012/YTPlusM-DIY), but simply fork this repository (main branch). [YTPlusM DIY](https://github.com/Mark02-2012/YTPlusM-DIY) will not be updated anymore**
 
 **2. I removed download table and all releases' files due to legal reason;**
-### BUT I CREATED A NEW TELEGRAM CHANNEL FOR RELEASES! 👉[LINK TO JOIN](https://t.me/Mark02workshop_official)👈 (IMPORTANT: IF T.ME LINKS DO NOT WORK, SEARCH FOR THIS ON TELEGRAM: `@Mark02workshop_official`)
+### BUT I CREATED A NEW TELEGRAM CHANNEL FOR RELEASES! 👉[LINK TO JOIN](https://t.me/Mark02workshop_official)👈 (If t.me links do not work, search for this on Telegram: `@Mark02workshop_official`)
 
 **3. I also created a new tweak to fix playback issues! You can find it in my new releases in the Telegram channel, in GitHub Actions and [in the official repository](https://github.com/Mark02-2012/YTPlaybackFix)**
 
